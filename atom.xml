@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yybawang.github.io</id>
     <title>Gridea</title>
-    <updated>2019-06-18T05:46:39.242Z</updated>
+    <updated>2019-06-21T02:35:39.402Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yybawang.github.io"/>
     <link rel="self" href="https://yybawang.github.io/atom.xml"/>
@@ -11,12 +11,82 @@
     <icon>https://yybawang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[測試]]></title>
+        <title type="html"><![CDATA[assign.js]]></title>
+        <id>https://yybawang.github.io/post/assignjs</id>
+        <link href="https://yybawang.github.io/post/assignjs">
+        </link>
+        <updated>2019-06-21T02:31:57.000Z</updated>
+        <content type="html"><![CDATA[<p>新建一個 assign.js</p>
+<pre><code class="language-javascript">export default function assign(target, items) {
+    
+    items = [].slice.call(arguments);
+    
+    return items.reduce(function (target, item) {
+        return Object.keys(item).reduce(function (target, property) {
+            target[property] = item[property];
+            return target;
+        }, target);
+    }, target);
+};
+</code></pre>
+<p>使用</p>
+<pre><code>		import assign from './assign';
+		assign(from, {name: 'some'});
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Table 固定標頭 Thead]]></title>
         <id>https://yybawang.github.io/post/ce-shi</id>
         <link href="https://yybawang.github.io/post/ce-shi">
         </link>
         <updated>2019-06-18T05:40:43.000Z</updated>
-        <content type="html"><![CDATA[<p>測試</p>
+        <content type="html"><![CDATA[<hr>
+<h2 id="title-table-thead-fixeddate-2019-04-13-100502tags">title: table-thead-fixed
+date: 2019-04-13 10:05:02
+tags:</h2>
+<h2 id="html-table-的-thead-随屏幕滚动固定在页面顶部">HTML table 的 thead 随屏幕滚动固定在页面顶部</h2>
+<h3 id="html">HTML</h3>
+<pre><code class="language-html">    &lt;table&gt;
+        &lt;thead class=&quot;thead-fixed&quot;&gt;
+        &lt;tr&gt;
+            &lt;th&gt;头一&lt;/th&gt;
+            &lt;th&gt;头二&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+    &lt;/table&gt;
+
+</code></pre>
+<h3 id="css">CSS</h3>
+<pre><code class="language-css">    /* 只能写在 th 上 */
+    .thead-fixed &gt; tr &gt; th {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        background-color:#F6F6F6;
+        position:relative;
+        top:0;
+        z-index:1;
+    }
+
+</code></pre>
+<h3 id="js">JS</h3>
+<pre><code class="language-javascript">    // thead 表头固定
+    $(window).scroll(function(){
+        let $table = $('table'), $thead = $table.find('thead');
+        if($thead.length &lt;= 0){
+            return;
+        }
+        let scroll_top = $(document).scrollTop();
+        let thead_offset_top = $table.offset().top - $thead.height();
+        let offset = Math.ceil(scroll_top - thead_offset_top);
+        if(offset &gt; 0){
+            $thead.find('th').css('transform', 'translateY('+offset+'px)');
+        }else{
+            $thead.find('th').css('transform', 'translateY(0)');
+        }
+    });
+
+</code></pre>
 ]]></content>
     </entry>
     <entry>
